@@ -1,5 +1,9 @@
 on: push
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   test:
     strategy:
@@ -9,21 +13,38 @@ jobs:
         from-image:
           - name: "windows"
             tag: "1809"
+          - name: "windows/servercore"
+            tag: "1809"
         otp:
           - version: "24.0.4"
             hash: "A69E439C7C6266B523CBDF66036CEA4597BE477E6914498551C9FBC54FE5770F"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Image meta
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
-          .\build.ps1 `
-            -from_image_name ${{ matrix.from-image.name }} `
-            -from_image_tag ${{ matrix.from-image.tag }} `
-            -otp_version ${{ matrix.otp.version }} `
-            -otp_hash ${{ matrix.otp.hash }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false # ${{ github.event_name != 'pull_request' }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      # - run: |
+      #     .\build.ps1 `
+      #       -from_image_name ${{ matrix.from-image.name }} `
+      #       -from_image_tag ${{ matrix.from-image.tag }} `
+      #       -otp_version ${{ matrix.otp.version }} `
+      #       -otp_hash ${{ matrix.otp.hash }} `
+      #       -repo
