@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: |
-          build.ps1 `
+          .\build.ps1 `
             -from_image_name ${{ matrix.from-image.name }} `
             -from_image_tag ${{ matrix.from-image.tag }} `
             -otp_version ${{ matrix.otp.version }} `
