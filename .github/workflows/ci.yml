@@ -8,7 +8,7 @@ jobs:
           - windows-latest
         from-image:
           - name: "windows"
-            tag: "20H2"
+            tag: "1809"
         otp:
           - version: "24.0.4"
             hash: "A69E439C7C6266B523CBDF66036CEA4597BE477E6914498551C9FBC54FE5770F"
