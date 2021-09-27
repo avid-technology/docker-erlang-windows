@@ -1,7 +1,7 @@
 param (
   $from_image_repo="mcr.microsoft.com",
   $from_image_name="windows/servercore",
-  $from_image_tag="20H2",
+  $from_image_tag="1809",
 
   $otp_version="24.0.6",
   $otp_hash="29AB0BF965129A6D7E6E1E46790BF2B7C37A31AD6F958B7F15AB3C1FCA08DEF0",

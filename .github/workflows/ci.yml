@@ -20,8 +20,8 @@ jobs:
         otp:
           - version: "24.0.6"
             hash: "29AB0BF965129A6D7E6E1E46790BF2B7C37A31AD6F958B7F15AB3C1FCA08DEF0"
-          - version: "24.0.4"
-            hash: "A69E439C7C6266B523CBDF66036CEA4597BE477E6914498551C9FBC54FE5770F"
+          # - version: "24.0.4"
+          #   hash: "A69E439C7C6266B523CBDF66036CEA4597BE477E6914498551C9FBC54FE5770F"
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout repository

@@ -1,5 +1,5 @@
-ARG BUILD_IMAGE=mcr.microsoft.com/windows/servercore:20H2
-ARG FROM_IMAGE=mcr.microsoft.com/windows/servercore:20H2
+ARG BUILD_IMAGE=mcr.microsoft.com/windows/servercore:1809
+ARG FROM_IMAGE=mcr.microsoft.com/windows/servercore:1809
 
 FROM $BUILD_IMAGE as build
 
