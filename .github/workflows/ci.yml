@@ -2,7 +2,7 @@ on: push
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
+  IMAGE: avid-technology/erlang
 
 jobs:
   test:
@@ -25,13 +25,14 @@ jobs:
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v1
         with:
-          registry: ghcr.io
+          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - run: |
+      - name: Build and push
+        run: |
           .\build.ps1 `
             -from_image_name ${{ matrix.from-image.name }} `
             -from_image_tag ${{ matrix.from-image.tag }} `
             -otp_version ${{ matrix.otp.version }} `
             -otp_hash ${{ matrix.otp.hash }} `
-            -repo ${{ env.REGISTRY }}/avid-technology
+            -repo ${{ env.REGISTRY }}/${{ env.IMAGE }}
