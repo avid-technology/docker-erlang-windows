@@ -1,0 +1,12 @@
+on: push
+
+jobs:
+  test:
+    strategy:
+      matrix:
+        os:
+          - windows-latest
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - run: docker info
