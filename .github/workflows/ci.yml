@@ -6,7 +6,11 @@ jobs:
       matrix:
         os:
           - windows-latest
+        otp:
+          - version: "24.0.1"
+            hash: "test"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - run: docker info
+      - run: echo ${{ matrix.otp.version }}
+      - run: echo ${{ matrix.otp.hash }}
