@@ -6,11 +6,18 @@ jobs:
       matrix:
         os:
           - windows-latest
+        from-image:
+          - name: "windows"
+            tag: "20H2"
         otp:
-          - version: "24.0.1"
-            hash: "test"
+          - version: "24.0.4"
+            hash: "A69E439C7C6266B523CBDF66036CEA4597BE477E6914498551C9FBC54FE5770F"
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v2
-      - run: echo ${{ matrix.otp.version }}
-      - run: echo ${{ matrix.otp.hash }}
+      - run: |
+          build.ps1 `
+            -from_image_name ${{ matrix.from-image.name }} `
+            -from_image_tag ${{ matrix.from-image.tag }} `
+            -otp_version ${{ matrix.otp.version }} `
+            -otp_hash ${{ matrix.otp.hash }}
