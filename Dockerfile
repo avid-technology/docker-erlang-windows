@@ -20,8 +20,11 @@ ARG OTP_VERSION
 
 COPY --from=build ["C:/Program Files/erl-${OTP_VERSION}", "C:/Program Files/erl-${OTP_VERSION}"]
 
-SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+# This is a workaround for nanoserver where not possible to set PATH using setx or similar
+ENV PATH="C:\Windows\system32;C:\Windows;C:/Program Files/erl-${OTP_VERSION}/bin"
 
-RUN setx /M PATH $($Env:PATH + ';C:\Program Files\erl-' + $Env:OTP_VERSION + '\bin')
+# Some failed attempts below; someone could fix these!
+# RUN setx /M PATH "%PATH%;%ProgramFiles%\erl-%OTP_VERSION%\bin"
+# RUN setx /M PATH $($Env:PATH + ';C:\Program Files\erl-' + $Env:OTP_VERSION + '\bin')
 
 CMD [ "erl.exe" ]

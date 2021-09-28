@@ -3,6 +3,10 @@ param (
   $from_image_name="windows/servercore",
   $from_image_tag="1809",
 
+  $build_image_repo="mcr.microsoft.com",
+  $build_image_name="windows/servercore",
+  $build_image_tag="1809",
+
   $otp_version="24.0.6",
   $otp_hash="29AB0BF965129A6D7E6E1E46790BF2B7C37A31AD6F958B7F15AB3C1FCA08DEF0",
 
@@ -10,6 +14,7 @@ param (
 )
 
 $from_image = "${from_image_repo}/${from_image_name}:${from_image_tag}"
+$build_image = "${build_image_repo}/${build_image_name}:${build_image_tag}"
 
 $windows_tag = ($from_image_name.Split("/") + $from_image_tag) -join "-"
 $otp_tag = @($otp_version, $windows_tag) -join "-"
@@ -19,6 +24,7 @@ docker build `
   --build-arg "OTP_VERSION=$otp_version" `
   --build-arg "OTP_HASH=$otp_hash" `
   --build-arg "FROM_IMAGE=$from_image" `
+  --build-arg "BUILD_IMAGE=$build_image" `
   -t $tag `
   .
 
