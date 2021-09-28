@@ -6,9 +6,7 @@ FROM $BUILD_IMAGE as build
 ARG OTP_VERSION
 ARG OTP_HASH
 
-# ADD https://github.com/erlang/otp/releases/download/OTP-${OTP_VERSION}/otp_win64_${OTP_VERSION}.exe ./otp-installer.exe
-ADD otp-installer.exe otp-installer.exe
-
+ADD https://github.com/erlang/otp/releases/download/OTP-${OTP_VERSION}/otp_win64_${OTP_VERSION}.exe ./otp-installer.exe
 
 SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
