@@ -2,7 +2,7 @@ on: push
 
 env:
   REGISTRY: ghcr.io
-  IMAGE: avid-technology/erlang-windows
+  IMAGE: avid-technology/erlang
 
 jobs:
   test:
