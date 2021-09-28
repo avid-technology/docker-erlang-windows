@@ -1,6 +1,6 @@
 # docker-erlang-windows
 
-Windows containers with Erlang pre-installed.
+Windows containers with Erlang pre-installed.  Experimental.
 
 ## Usage
 
@@ -8,7 +8,7 @@ Head over to this repos published [packages](https://github.com/orgs/avid-techno
 
 ## Known issues
 
-* Images based on `windows/nanoserver` are experimental.  PRs welcome.
+* Images based on `windows/nanoserver` are _really_ experimental as in they don't work.  Our assumption is that there are some missing dependencies in the image that need to be included as part of the build process.  PRs welcome.
 
 ## Authors
 
