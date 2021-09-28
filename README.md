@@ -9,3 +9,8 @@ Head over to this repos published [packages](https://github.com/orgs/avid-techno
 ## Known issues
 
 * Images based on `windows/nanoserver` are experimental.  PRs welcome.
+
+## Authors
+
+* @16jabm
+* @joeapearson
