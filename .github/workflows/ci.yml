@@ -5,7 +5,7 @@ env:
   IMAGE: avid-technology/erlang
 
 jobs:
-  test:
+  build:
     strategy:
       matrix:
         os:
