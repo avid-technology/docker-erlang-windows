@@ -6,7 +6,33 @@ jobs:
       matrix:
         os:
           - windows-latest
+        from-image-name:
+          - windows
+          - windows/servercore
+          - windows/nanoserver
+        from-image-tag:
+          - "10.0.17763.2114"
+          - "1809"
+        otp:
+          - version: "24.0.6"
+            hash: "29AB0BF965129A6D7E6E1E46790BF2B7C37A31AD6F958B7F15AB3C1FCA08DEF0"
+          - version: "24.0.4"
+            hash: "A69E439C7C6266B523CBDF66036CEA4597BE477E6914498551C9FBC54FE5770F"
     runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - run: docker info
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push
+        run: |
+          .\build.ps1 `
+            -from_image_name ${{ matrix.from-image-name }} `
+            -from_image_tag ${{ matrix.from-image-tag }} `
+            -otp_version ${{ matrix.otp.version }} `
+            -otp_hash ${{ matrix.otp.hash }} `
+            -repo ${{ env.REGISTRY }}/${{ env.IMAGE }}
