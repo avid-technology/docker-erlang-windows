@@ -16,11 +16,12 @@ FROM $FROM_IMAGE
 
 ARG OTP_VERSION
 
+# run OTP installer in this image, copying Program Files over doesn't work
 COPY --from=build ["C:/otp-installer.exe", "C:/otp-installer.exe"]
 
 RUN .\otp-installer.exe /S /w /v"/qn"
 
-RUN del /f /q .\otp-installer.exe
+RUN del /f .\otp-installer.exe
 
 # This is a workaround for nanoserver where not possible to set PATH using setx or similar
 ENV PATH="C:\Windows\system32;C:\Windows;C:/Program Files/erl-${OTP_VERSION}/bin"
@@ -29,4 +30,4 @@ ENV PATH="C:\Windows\system32;C:\Windows;C:/Program Files/erl-${OTP_VERSION}/bin
 # RUN setx /M PATH "%PATH%;%ProgramFiles%\erl-%OTP_VERSION%\bin"
 # RUN setx /M PATH $($Env:PATH + ';C:\Program Files\erl-' + $Env:OTP_VERSION + '\bin')
 
-CMD [ "cmd.exe" ]
+CMD [ "erl.exe" ]
