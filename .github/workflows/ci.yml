@@ -13,7 +13,6 @@ jobs:
         from-image-name:
           - windows
           - windows/servercore
-          - windows/nanoserver
         from-image-tag:
           - "10.0.17763.2114"
           - "1809"
