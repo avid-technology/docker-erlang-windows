@@ -18,6 +18,8 @@ jobs:
           - "10.0.17763.2114"
           - "1809"
         otp:
+          - version: "24.2"
+            hash: "C22052C4920F06A9044F514A427B1C4116DA6DB6D6D6070EEDEB2955F1F6869B"
           - version: "24.0.6"
             hash: "29AB0BF965129A6D7E6E1E46790BF2B7C37A31AD6F958B7F15AB3C1FCA08DEF0"
           - version: "24.0.4"
